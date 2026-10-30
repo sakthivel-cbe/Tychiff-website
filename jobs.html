@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#01415C">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Open Roles | Tychiff Solutions</title>
+  <meta name="description" content="Tychiff Solutions — AI-assisted recruitment, staffing and end-to-end hiring lifecycle management. We build teams, you build empires.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+<div class="top-strip">
+    <div class="container top-strip-inner">
+      <span>Recruitment & Staffing • IT & Non-IT White Collar</span>
+      <div>
+        <a href="mailto:clients@tychiff.com">clients@tychiff.com</a>
+        <a href="tel:+918095858644">+91 80958 58644</a>
+      </div>
+    </div>
+  </div>
+<header class="header">
+    <div class="container nav">
+      <a class="brand" href="index.html#home"><img class="logo" src="logo.png" alt="Tychiff Solutions"></a>
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <nav class="nav-links">
+        <a href="jobs.html" class="active">Jobs</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#industries">Industries</a>
+        <a href="index.html#steps">17 Steps</a>
+        <a href="index.html#workflow">Workflow</a>
+        <a href="index.html#about-us">About</a>
+        <a href="login.html" class="nav-login">Login</a>
+        <a class="nav-button" href="index.html#requirement">Share Requirement</a>
+      </nav>
+    </div>
+  </header>
+<main>
+<section class="jobs-hero"><div class="container"><span class="eyebrow">Open roles</span><h1>Find a job that <span>actually fits.</span></h1><p>Every role here is a real requirement from a company we work with. Apply on WhatsApp or sign in, and a consultant will call you back.</p>
+<div class="filters"><input id="q" placeholder="Job title, skill or keyword"><select id="cat"><option value="">All categories</option><option>Accounts</option><option>Banking &amp; Finance</option><option>Freshers &amp; Campus</option><option>Healthcare</option><option>IT &amp; Software</option><option>Logistics</option><option>Retail &amp; Sales</option></select><select id="loc"><option value="">All locations</option></select><select id="typ"><option value="">All job types</option><option>Full-time</option></select></div></div></section>
+<section class="container"><p class="job-count" id="count"></p><div class="job-grid" id="grid"></div>
+<p class="note" style="margin:-50px 0 60px">Not seeing your role? <a class="text-link" href="signup-candidate.html">Create a candidate account</a> and we will match you to new requirements.</p></section>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+      <div><a class="brand footer-brand" href="index.html#home"><img class="logo" src="logo-light.png" alt="Tychiff Solutions"></a><p>Recruitment & staffing solutions built around a structured hiring lifecycle.</p></div>
+      <div><b>Services</b><a href="jobs.html">Jobs</a><a href="index.html#services">Recruitment</a><a href="index.html#industries">Industries</a><a href="index.html#workflow">Staffing Workflow</a><a href="index.html#ai">AI Screening</a><a href="index.html#dashboard">KPI Tracking</a></div>
+      <div><b>Portals</b><a href="login-candidate.html">Candidate Login</a><a href="login-recruiter.html">Recruiter Login</a><a href="login-admin.html">Admin Login</a><a href="login-management.html">Management Login</a></div>
+      <div><b>Contact</b><a href="mailto:clients@tychiff.com">clients@tychiff.com</a><a href="mailto:jobs@tychiff.com">jobs@tychiff.com</a><a href="tel:+918095858644">+91 80958 58644</a><span>Chennai, India</span></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Tychiff Solutions. All rights reserved.</span><span>We Build Teams, You Build Empires.</span></div>
+  </footer>
+<script src="jobs-data.js"></script><script src="script.js"></script>
+<script>
+const J=tyJobs(),city=j=>j.loc.split(',').pop().trim();
+document.getElementById('loc').innerHTML+= [...new Set(J.map(city))].sort().map(c=>`<option>${c}</option>`).join('');
+function draw(){const q=g('q').value.toLowerCase(),c=g('cat').value,l=g('loc').value,t=g('typ').value;
+ const r=J.filter(j=>(!q||(j.title+j.cat+j.desc+j.company).toLowerCase().includes(q))&&(!c||j.cat===c)&&(!l||city(j)===l)&&(!t||j.type.startsWith(t)));
+ g('count').textContent=r.length+' open role'+(r.length==1?'':'s');g('grid').innerHTML=r.length?r.map(tyJobCard).join(''):'<div class="empty">No roles match your search. Try clearing a filter.</div>'}
+function g(i){return document.getElementById(i)}
+['q','cat','loc','typ'].forEach(i=>g(i).addEventListener('input',draw));draw();
+</script><script>if(getComputedStyle(document.body).backgroundColor==='rgba(0, 0, 0, 0)'){document.body.insertAdjacentHTML('afterbegin','<div style="background:#fff3cd;color:#664d03;padding:12px 16px;font:14px sans-serif;border-bottom:1px solid #ffe69c">This page cannot find its design files. Unzip the whole tychiff-site folder and open the page from inside it.</div>')}</script></body></html>
